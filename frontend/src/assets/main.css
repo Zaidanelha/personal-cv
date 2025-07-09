@@ -1,13 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Style untuk animasi scroll yang akan kita pakai nanti */
-.before-enter {
-opacity: 0;
-transform: translateY(100px);
-transition: all 1s ease-out;
+
+body {
+  @apply bg-[#121212] text-gray-200 font-sans antialiased;
+  scroll-behavior: smooth;
 }
+
+.before-enter {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 1s ease-out;
+}
+
 .enter {
-opacity: 1;
-transform: translateY(0px);
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.card-dark {
+  @apply bg-[#1e1e1e] shadow-lg rounded-xl p-6;
+}
+
+.btn-dark {
+  @apply bg-cyan-500 hover:bg-cyan-600 text-white rounded-full px-4 py-2 transition;
 }
