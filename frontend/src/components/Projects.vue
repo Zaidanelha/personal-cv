@@ -16,73 +16,57 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section id="proyek" class="py-24 bg-[#0d0d0d] text-white animate-fade-in">
+  <section id="proyek" class="py-24 bg-[#0d0d0d] text-white">
     <div class="container mx-auto px-6">
       <SectionTitle title="Proyek Unggulan" />
 
-      <div class="space-y-20 mt-16">
+      <div class="grid md:grid-cols-2 gap-10 mt-16">
         <div
-          v-for="(project, index) in projects"
+          v-for="project in projects"
           :key="project.title"
-          class="flex flex-col lg:flex-row items-start gap-8 group"
+          class="group rounded-3xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-lg hover:shadow-cyan-500/30 transition-all duration-500"
         >
           <!-- Gambar -->
-          <div class="w-full lg:w-[40%] overflow-hidden rounded-xl">
+          <div class="overflow-hidden rounded-xl mb-5">
             <img
               :src="project.image"
               alt="Preview Proyek"
-              class="w-full h-60 object-cover rounded-xl transition duration-500 group-hover:scale-105"
+              class="w-full h-56 object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
             />
           </div>
 
-          <!-- Konten -->
-          <div class="w-full lg:w-[60%] space-y-4">
-            <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition duration-300">
-              {{ project.title }}
-            </h3>
+          <!-- Judul -->
+          <h3 class="text-xl font-bold mb-2 text-white group-hover:text-cyan-400 transition">
+            {{ project.title }}
+          </h3>
 
-            <p class="text-gray-400 text-sm leading-relaxed">
-              {{ project.description }}
-            </p>
+          <!-- Deskripsi -->
+          <p class="text-sm text-gray-400 mb-4">
+            {{ project.description }}
+          </p>
 
-            <div class="flex flex-wrap gap-2">
-              <span
-                v-for="tech in project.tech"
-                :key="tech"
-                class="bg-gray-800 text-cyan-300 text-xs px-3 py-1 rounded-full font-mono"
-              >
-                {{ tech }}
-              </span>
-            </div>
-
-            <a
-              :href="project.link"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-block mt-2 text-sm font-medium text-cyan-400 hover:text-cyan-300 hover:underline transition"
+          <!-- Teknologi -->
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span
+              v-for="tech in project.tech"
+              :key="tech"
+              class="bg-cyan-900/30 border border-cyan-600 text-cyan-300 text-xs px-3 py-1 rounded-full font-mono"
             >
-              🔗 Lihat Detail
-            </a>
+              {{ tech }}
+            </span>
           </div>
+
+          <!-- Link -->
+          <a
+            :href="project.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block text-sm font-medium text-cyan-400 hover:text-cyan-300 hover:underline transition"
+          >
+            🔗 Lihat Detail
+          </a>
         </div>
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 1s ease-out forwards;
-}
-</style>
