@@ -26,17 +26,17 @@ const skills = [
 
 const projects = [
     {
-        title: 'Project 1',
-        image: 'https://i.pinimg.com/736x/ff/c8/a2/ffc8a2695f83e2ead09fef74c0dc1065.jpg',
+        title: 'My Portofolio Investment',
+        image: '/images/8400.jpg',
         description: '',
-        tech: ['Vue.js', 'Express.js', 'PostgreSQL'],
+        tech: [],
         link: '#'
     },
     {
-        title: 'Project 2',
-        image: 'https://i.pinimg.com/736x/dc/3c/d2/dc3cd2a0ad5375a59f27007fcefb6a7f.jpg',
+        title: 'Lucien Avenue',
+        image: '/images/lucien.jpg',
         description: '',
-        tech: ['React', 'Firebase'],
+        tech: ['Vue.js', 'Bootstrap'],
         link: '#'
     }
 ];
