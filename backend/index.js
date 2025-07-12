@@ -5,12 +5,21 @@ const { educationHistory, skills, projects } = require('./data.js');
 const app = express();
 
 const corsOptions = {
-  // INI ALAMAT BARU ANDA
+  // Pastikan ini URL Vercel frontend Anda
   origin: 'https://zaidanelha-portfolio.vercel.app', 
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  optionsSuccessStatus: 200
+  credentials: true,
+  optionsSuccessStatus: 204
 };
+
+// --- PERUBAHAN KUNCI DI SINI ---
+// 1. Tangani permintaan "izin" (pre-flight) secara eksplisit
+app.options('*', cors(corsOptions)); 
+
+// 2. Terapkan CORS untuk semua permintaan lainnya
 app.use(cors(corsOptions));
+// --- AKHIR PERUBAHAN ---
+
 app.use(express.json());
 
 // Rute API Anda
@@ -24,9 +33,7 @@ app.get('/skills', (req, res) => {
 });
 app.get('/projects', (req, res) => res.json(projects));
 
-// Ini baris yang kita perbaiki
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
