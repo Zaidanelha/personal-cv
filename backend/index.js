@@ -5,7 +5,13 @@ const { educationHistory, skills, projects } = require('./data');
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+// Konfigurasi CORS untuk mengizinkan domain Vercel Anda
+const corsOptions = {
+  origin: 'https://personal-cv-seven-theta.vercel.app',
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Education endpoint
