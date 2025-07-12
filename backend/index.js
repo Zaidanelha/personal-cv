@@ -4,20 +4,18 @@ const { educationHistory, skills, projects } = require('./data.js');
 
 const app = express();
 
-// --- KONFIGURASI CORS FINAL YANG BENAR ---
+// FINAL CORS FIX
 const corsOptions = {
-  // Ini adalah URL Vercel frontend Anda yang benar
-  origin: 'https://zaidanelha-portfolio.vercel.app', 
+  origin: 'https://zaidanelha-portfolio.vercel.app', // PASTIKAN INI URL VERCEL ANDA
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   optionsSuccessStatus: 200
 };
-
-// Terapkan CORS dengan opsi di atas
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// --- Rute API Anda ---
+// Rute API Anda
 app.get('/education', (req, res) => res.json(educationHistory));
+
 app.get('/skills', (req, res) => {
   const skillsWithPercent = skills.map(skill => ({
     ...skill,
@@ -25,14 +23,13 @@ app.get('/skills', (req, res) => {
   }));
   res.json(skillsWithPercent);
 });
+
 app.get('/projects', (req, res) => res.json(projects));
 
 // Port dari Railway
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-// Baris ini diabaikan oleh Railway, tapi bagus untuk ada
 module.exports = app;
