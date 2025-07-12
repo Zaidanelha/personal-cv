@@ -6,7 +6,7 @@ const app = express();
 
 const corsOptions = {
   // Pastikan ini URL Vercel frontend Anda
-  origin: 'https://zaidanelha-portofolio.vercel.app/', 
+  origin: 'https://zaidanelha-portofolio.vercel.app', 
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   optionsSuccessStatus: 200
 };
