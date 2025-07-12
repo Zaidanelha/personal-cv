@@ -36,7 +36,7 @@
 
 <script setup>
 import SectionTitle from './SectionTitle.vue'
-import { skills as skillsData } from '../data.js' // Impor dengan nama alias
+import { skills as skillsData } from '../../../backend/data.js' // Impor dengan nama alias
 
 // Gunakan data yang sudah diimpor
 const skills = skillsData 

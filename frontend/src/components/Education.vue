@@ -1,6 +1,6 @@
 <script setup>
 import SectionTitle from './SectionTitle.vue'
-import { educationHistory } from '../data.js'
+import { educationHistory } from '../../../backend/data.js'
 </script>
 
 <template>

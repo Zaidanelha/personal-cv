@@ -1,6 +1,6 @@
 <script setup>
 import SectionTitle from './SectionTitle.vue'
-import { projects } from '../data.js'
+import { projects } from '../../../backend/data.js'
 </script>
 
 <template>
