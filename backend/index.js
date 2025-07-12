@@ -4,22 +4,32 @@ const { educationHistory, skills, projects } = require('./data.js');
 
 const app = express();
 
-// --- KONFIGURASI CORS FINAL YANG BENAR ---
+// --- KONFIGURASI CORS PALING AMAN ---
+const allowedOrigins = ['https://zaidanelha-portfolio.vercel.app'];
+
 const corsOptions = {
-  // Ini adalah alamat website frontend Anda di Vercel
-  origin: 'https://zaidanelha-portfolio.vercel.app', 
+  origin: (origin, callback) => {
+    // Izinkan jika origin ada di dalam daftar, atau jika tidak ada origin (seperti request dari Postman/server)
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  optionsSuccessStatus: 200
+  credentials: true,
+  optionsSuccessStatus: 204
 };
 
-// Terapkan CORS dengan opsi di atas
+// Tangani pre-flight request untuk semua rute
+app.options('*', cors(corsOptions));
+
+// Terapkan CORS untuk semua request
 app.use(cors(corsOptions));
 
 app.use(express.json());
 
-
-// --- RUTE API ANDA ---
-// (Kita kembalikan rute /api/ untuk konsistensi)
+// --- Rute API Anda ---
 app.get('/api/education', (req, res) => res.json(educationHistory));
 
 app.get('/api/skills', (req, res) => {
@@ -31,7 +41,6 @@ app.get('/api/skills', (req, res) => {
 });
 
 app.get('/api/projects', (req, res) => res.json(projects));
-
 
 // Port dari Railway
 const PORT = process.env.PORT || 3000;
