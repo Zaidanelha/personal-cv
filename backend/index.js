@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { educationHistory, skills, projects } = require('./data');
+const { educationHistory, skills, projects } = require('./data.js');
 
 const app = express();
 const PORT = 3000;
