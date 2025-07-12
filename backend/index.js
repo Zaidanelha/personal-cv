@@ -4,32 +4,35 @@ const { educationHistory, skills, projects } = require('./data.js');
 
 const app = express();
 
-// FINAL CORS FIX
 const corsOptions = {
-  origin: 'https://zaidanelha-portfolio.vercel.app', // PASTIKAN INI URL VERCEL ANDA
+  origin: 'https://zaidanelha-portfolio.vercel.app',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Rute API Anda
-app.get('/education', (req, res) => res.json(educationHistory));
+// --- KEMBALIKAN /api DENGAN CARA YANG BENAR ---
+const apiRouter = express.Router();
 
-app.get('/skills', (req, res) => {
+// Rute sekarang tidak perlu /api lagi di depannya
+apiRouter.get('/education', (req, res) => res.json(educationHistory));
+apiRouter.get('/skills', (req, res) => {
   const skillsWithPercent = skills.map(skill => ({
     ...skill,
     percent: skill.level === 'Mahir' ? 90 : skill.level === 'Menengah' ? 70 : 50
   }));
   res.json(skillsWithPercent);
 });
+apiRouter.get('/projects', (req, res) => res.json(projects));
 
-app.get('/projects', (req, res) => res.json(projects));
+// Express akan menambahkan /api di depan semua rute di atas
+app.use('/api', apiRouter);
+// --- AKHIR PERUBAHAN ---
 
-// Port dari Railway
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is listening on port ${PORT}`);
 });
 
 module.exports = app;

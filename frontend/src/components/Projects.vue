@@ -7,7 +7,7 @@ const projects = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/projects`);
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/education`);
     projects.value = response.data;
   } catch (error) {
     console.error(error);

@@ -43,7 +43,7 @@ const skills = ref([])
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/skills`);
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/education`);
     skills.value = response.data
   } catch (error) {
     console.error(error)
