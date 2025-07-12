@@ -5,20 +5,18 @@ const { educationHistory, skills, projects } = require('./data.js');
 const app = express();
 
 const corsOptions = {
-  origin: 'https://personal-cv-six-beta.vercel.app',
+  // Ganti dengan URL Vercel frontend Anda
+  origin: 'https://personal-cv-six-beta.vercel.app', 
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// RUTE TANPA /api
+app.get('/education', (req, res) => res.json(educationHistory));
 
-// --- RUTE BARU YANG LEBIH AMAN ---
-const apiRouter = express.Router();
-
-apiRouter.get('/education', (req, res) => res.json(educationHistory));
-
-apiRouter.get('/skills', (req, res) => {
+app.get('/skills', (req, res) => {
   const skillsWithPercent = skills.map(skill => ({
     ...skill,
     percent: skill.level === 'Mahir' ? 90 : skill.level === 'Menengah' ? 70 : 50
@@ -26,12 +24,7 @@ apiRouter.get('/skills', (req, res) => {
   res.json(skillsWithPercent);
 });
 
-apiRouter.get('/projects', (req, res) => res.json(projects));
-
-// Gunakan router ini dengan prefix /api
-app.use('/api', apiRouter);
-// --- AKHIR RUTE BARU ---
-
+app.get('/projects', (req, res) => res.json(projects));
 
 // Ekspor aplikasi untuk Vercel/Railway
 module.exports = app;
