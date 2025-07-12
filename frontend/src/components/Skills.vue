@@ -35,18 +35,6 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
 import SectionTitle from './SectionTitle.vue'
-
-const skills = ref([])
-
-onMounted(async () => {
-  try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/skills`);
-    skills.value = response.data
-  } catch (error) {
-    console.error(error)
-  }
-})
+import { educationHistory } from '../data.js'
 </script>

@@ -1,18 +1,6 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import SectionTitle from './SectionTitle.vue';
-
-const projects = ref([]);
-
-onMounted(async () => {
-  try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects`);
-    projects.value = response.data;
-  } catch (error) {
-    console.error(error);
-  }
-});
+import SectionTitle from './SectionTitle.vue'
+import { projects } from '../data.js'
 </script>
 
 <template>
