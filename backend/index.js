@@ -4,36 +4,58 @@ const { educationHistory, skills, projects } = require('./data.js');
 
 const app = express();
 
-// --- PERUBAHAN PENTING UNTUK DEBUGGING ---
-// Untuk sementara, izinkan SEMUA permintaan dari domain manapun.
-app.use(cors());
-// --- AKHIR PERUBAHAN ---
+// --- KONFIGURASI CORS YANG PALING AMAN ---
+// Izinkan semua permintaan dari domain frontend Anda
+const corsOptions = {
+  origin: [
+    'https://personal-cv-six-beta.vercel.app', // Ganti dengan URL frontend Anda
+    'http://localhost:5173' // Untuk development lokal jika perlu
+  ],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204
+};
+
+// Terapkan CORS sebelum semua rute
+app.use(cors(corsOptions));
+
+// Secara eksplisit tangani OPTIONS request (pre-flight)
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
-// Education endpoint
-app.get('/api/education', (req, res) => res.json(educationHistory));
+// --- RUTE API ANDA ---
+app.get('/api/education', (req, res) => {
+  console.log("Request diterima di /api/education");
+  res.json(educationHistory);
+});
 
-// Skills endpoint
 app.get('/api/skills', (req, res) => {
+  console.log("Request diterima di /api/skills");
   const skillsWithPercent = skills.map(skill => ({
     ...skill,
-    percent:
-      skill.level === 'Mahir' ? 90 :
-      skill.level === 'Menengah' ? 70 :
-      50
+    percent: skill.level === 'Mahir' ? 90 : skill.level === 'Menengah' ? 70 : 50
   }));
   res.json(skillsWithPercent);
 });
 
-// Projects endpoint
-app.get('/api/projects', (req, res) => res.json(projects));
+app.get('/api/projects', (req, res) => {
+  console.log("Request diterima di /api/projects");
+  res.json(projects);
+});
 
-// Baris ini diabaikan oleh Vercel, tapi tidak apa-apa ada di sini.
+
+// Rute tes untuk memastikan server berjalan
+app.get('/api', (req, res) => {
+  res.send('Backend is running!');
+});
+
+
+// Jalankan server (diabaikan Vercel, tapi bagus untuk lokal)
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`✅ Server backend berjalan di http://localhost:${PORT}`);
 });
 
-// Baris paling penting untuk Vercel
+// Ekspor aplikasi untuk Vercel
 module.exports = app;
