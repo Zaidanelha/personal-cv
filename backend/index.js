@@ -5,8 +5,8 @@ const { educationHistory, skills, projects } = require('./data.js');
 const app = express();
 
 const corsOptions = {
-  // Pastikan ini URL Vercel frontend Anda
-  origin: 'https://zaidanelha-portofolio.vercel.app', 
+  // INI ALAMAT BARU ANDA
+  origin: 'https://zaidanelha-portfolio.vercel.app', 
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   optionsSuccessStatus: 200
 };
