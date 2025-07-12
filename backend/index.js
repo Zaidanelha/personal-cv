@@ -48,4 +48,14 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+// ... kode rute /projects Anda
+
+// RUTE TES UNTUK VERIFIKASI DEPLOYMENT
+app.get('/verifikasi-deploy', (req, res) => {
+  res.json({
+    pesan: "DEPLOYMENT INI SUDAH YANG PALING BARU!",
+    waktu: new Date().toISOString()
+  });
+});
+
 module.exports = app;
