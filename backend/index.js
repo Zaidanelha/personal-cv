@@ -1,28 +1,20 @@
 const express = require('express');
-const cors = require('cors');
+const cors =require('cors');
 const { educationHistory, skills, projects } = require('./data.js');
 
 const app = express();
 
-// Konfigurasi CORS lengkap
+// Konfigurasi CORS Final yang Benar
 const corsOptions = {
-  origin: 'https://zaidanelha-portfolio.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: 'https://zaidanelha-portfolio.vercel.app', // URL Frontend Anda
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   optionsSuccessStatus: 200
 };
-
 app.use(cors(corsOptions));
-
-// Tangani preflight OPTIONS request secara eksplisit
-app.options('*', cors(corsOptions));
-
-// Middleware tambahan
 app.use(express.json());
 
-// Rute API
+// Rute API Anda
 app.get('/education', (req, res) => res.json(educationHistory));
-
 app.get('/skills', (req, res) => {
   const skillsWithPercent = skills.map(skill => ({
     ...skill,
@@ -30,13 +22,14 @@ app.get('/skills', (req, res) => {
   }));
   res.json(skillsWithPercent);
 });
-
 app.get('/projects', (req, res) => res.json(projects));
 
-// Port Railway
+// INI BAGIAN PALING PENTING
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is listening on port ${PORT}`);
 });
 
+// Baris ini diabaikan oleh Railway, tapi tidak apa-apa
 module.exports = app;
