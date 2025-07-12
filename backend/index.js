@@ -6,7 +6,6 @@ const app = express();
 
 // Konfigurasi CORS Final yang Benar
 const corsOptions = {
-  // PASTIKAN INI ADALAH URL VERCEL ANDA YANG SEKARANG, TANPA GARIS MIRING DI AKHIR
   origin: 'https://zaidanelha-portfolio.vercel.app',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   optionsSuccessStatus: 200
